@@ -16,7 +16,7 @@ const Login = () => {
 
 const {login, isAuthentificated } =useAuth();
 const navigate = useNavigate();
-const {error,setError}= useState('');
+const [error,setError]= useState('');
 
 if (isAuthentificated) {
      navigate ('/home',{replace: true});
