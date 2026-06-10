@@ -40,12 +40,13 @@ const formik = useFormik ({
             setError(data.message)
          }else{
             login(data.token)
-            //navigate('/home');
+            console.log(data.token)
+            navigate ('/home',{replace: true});
          }
       
         })
-       .catch(errorApi =>{
-        setError(errorApi)
+       .catch(error => {
+        setError(error)
   })
 
 
