@@ -10,6 +10,7 @@ let logoutTimer;
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const login = (jwt) => {
     const decoded = jwtDecode(jwt);
@@ -22,8 +23,8 @@ export function AuthProvider({ children }) {
         Authorization: `Bearer ${jwt}`
       }
     }).then (response => {
-      localStorage.setItem("user", JSON.stringify(response.data.data));
-      setUser(response.data.data);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      setUser(response.data.user);
     });
     //setUser(decoded);
 
@@ -58,6 +59,8 @@ export function AuthProvider({ children }) {
       startLogoutTimer(decoded.exp);
     } catch {
       logout();
+    } finally {
+      setLoading(false);
     }
    
 
@@ -70,6 +73,7 @@ export function AuthProvider({ children }) {
         token,
         user,
         isAuthenticated: !!token,
+        loading,
         login,
         logout,
       }}

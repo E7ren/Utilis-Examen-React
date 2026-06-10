@@ -1,11 +1,12 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, Outlet } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 
-export default function ProtectedRoute({ children }) {
+export default function ProtectedRoute() {
   const location = useLocation();
 
-  // Simulación (normalmente token / contexto / redux)
-  const { isAuthenticated } = useAuth();
+const { isAuthenticated, token, loading } = useAuth();
+
+  if (loading) return null;
 
   if (!isAuthenticated) {
     return (
@@ -17,5 +18,5 @@ export default function ProtectedRoute({ children }) {
     );
   }
 
-  return children;
+  return <Outlet />;
 }

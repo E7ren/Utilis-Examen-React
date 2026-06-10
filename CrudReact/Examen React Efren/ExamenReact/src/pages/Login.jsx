@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router';
 import { useAuth } from '../auth/AuthContext';
 import {useFormik} from 'formik';
@@ -14,19 +14,21 @@ const validationSchema = Yup.object({
 
 const Login = () => {
 
-const {login, isAuthentificated } =useAuth();
+const {login, isAuthenticated } = useAuth();
 const navigate = useNavigate();
 const [error,setError]= useState('');
 
-if (isAuthentificated) {
-     navigate ('/home',{replace: true});
-}
+useEffect(() => {
+  if (isAuthenticated) {
+    navigate('/home', { replace: true });
+  }
+}, [isAuthenticated, navigate]);
+
 
 const formik = useFormik ({
   initialValues: {'email':'', 'password':''},
   validationSchema,
   onSubmit: (values) => {
-    console.log(values)
     // fetch a login
     fetch(`${apiUrl}auth/login`,{
       method :"POST",
@@ -40,13 +42,12 @@ const formik = useFormik ({
             setError(data.message)
          }else{
             login(data.token)
-            console.log(data.token)
-            navigate ('/home',{replace: true});
+            navigate('/home', {replace: true});
          }
       
         })
        .catch(error => {
-        setError(error)
+        setError(error.message ?? 'Error al iniciar sessió')
   })
 
 
