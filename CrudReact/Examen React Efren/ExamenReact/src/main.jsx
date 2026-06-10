@@ -9,7 +9,7 @@ import { AuthProvider } from './auth/AuthContext';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider route={Router} />
+      <RouterProvider router={Router} />
     </AuthProvider>
   </StrictMode>,
 )

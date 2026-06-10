@@ -7,7 +7,7 @@ import Layout from './pages/Layout';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import Registro from './pages/Registro';
+import Registro from './pages/Registros';
 import AreaPersonal from './pages/AreaPersonal';
 
 
@@ -33,3 +33,5 @@ export const Router = createBrowserRouter([
         ]
     }
 ])
+
+export default Router;
