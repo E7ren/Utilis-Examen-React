@@ -1,0 +1,55 @@
+        <tbody>
+          {products.length === 0 ? (
+            <tr>
+              <td colSpan="5" style={{ textAlign: 'center' }}>
+                No hay productos para mostrar.
+              </td>
+            </tr>
+          ) : (
+            products.map((product) => (
+              <tr key={product.id ?? product._id}>
+                <td>{product.id ?? product._id ?? '-'}</td>
+                <td>{product.name ?? product.nombre ?? '-'}</td>
+                <td>{product.price ?? product.precio ?? '-'}</td>
+                <td>{product.stock ?? '-'}</td>
+                <td>{product.category?.name ?? product.categoria ?? '-'}</td>
+              </tr>
+            ))
+          )}
+        </tbody>
+
+
+
+
+        ---------------------------------------------------------------------------
+
+
+              <header className="col-12 d-flex justify-content-between align-items-center p-3 bg-light">
+        <div className="headerlogo">
+          MiLogo
+        </div>
+
+        <nav className="gap-3 d-flex">
+          <Link to="/">Inicio</Link>
+          <Link to="/areaPersonal">Area Personal</Link>
+        </nav>
+      {/* if else if */}
+        {
+          !user ? (
+        <button className="headerbutton">
+          Iniciar sesión
+        </button>
+        ):(
+          user.name
+        )
+
+
+        }
+          
+        
+
+      </header>
+
+      ---------------------------
+                <p className=" text-light m-2">usuario: {user.name}</p>
+      -----------------------------
